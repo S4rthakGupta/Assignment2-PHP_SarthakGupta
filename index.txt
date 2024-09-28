@@ -8,18 +8,23 @@ define('DB_NAME', 'football_store'); // Database name
 // Create connection
 $dbc = new mysqli(DB_SERVER, DB_USERNAME, DB_PASSWORD);
 
+
 // Check connection
 if ($dbc->connect_error) {
     die("Connection failed: " . $dbc->connect_error);
 }
 
+
+
 // Create database
 $sql = "CREATE DATABASE IF NOT EXISTS " . DB_NAME;
 if ($dbc->query($sql) === TRUE) {
-    echo "<script>console.log('Database \"" . DB_NAME . "\" created successfully');</script>";
+    echo "Database '" . DB_NAME . "' created successfully\n";
 } else {
-    echo "<script>console.log('Error creating database: " . $dbc->error . "');</script>";
+    echo "Error creating database: " . $conn->error;
 }
+
+
 
 // Select the database
 $dbc->select_db(DB_NAME);
@@ -36,9 +41,9 @@ $table_query = "CREATE TABLE IF NOT EXISTS football_jerseys (
 
 // Execute the query to create the table
 if ($dbc->query($table_query) === TRUE) {
-    echo "<script>console.log('Table \"football_jerseys\" created successfully');</script>";
+    echo "Table 'football_jerseys' created successfully\n";
 } else {
-    echo "<script>console.log('Error creating table: " . $dbc->error . "');</script>";
+    echo "Error creating table: " . $dbc->error;
 }
 
 ?>

@@ -1,10 +1,14 @@
 <?php
-include('dbinit.php');
+include('../Models/dbinit.php');
 
 // Fetch football jerseys
 $query = "SELECT * FROM football_jerseys";
 $result = mysqli_query($dbc, $query);
+
+// Close the connection
+$dbc->close();
 ?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,7 +18,7 @@ $result = mysqli_query($dbc, $query);
 <body>
     <div class="container">
         <h1 class="mt-4">Football Jerseys</h1>
-        <a href="create.php" class="btn btn-primary mb-3">Add New Jersey</a>
+        <a href="insert_data.php" class="btn btn-primary mb-3">Add New Jersey</a>
         <table class="table table-bordered">
             <thead>
                 <tr>

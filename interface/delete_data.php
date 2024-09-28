@@ -1,5 +1,6 @@
 <?php
-include('dbinit.php');
+include('../Models/dbinit.php');
+
 
 $id = $_GET['id'] ?? null;
 $success = false;
@@ -13,11 +14,16 @@ if ($id) {
 
         if (mysqli_stmt_execute($stmt)) {
             $success = true;
+            header("Location: index.php"); // Redirect to index.php after deletion
+            exit(); // Ensure the script stops after redirection
         } else {
             $error = 'Error: ' . mysqli_error($dbc);
         }
     }
 }
+
+// Close the connection
+$dbc->close();
 ?>
 
 <!DOCTYPE html>
