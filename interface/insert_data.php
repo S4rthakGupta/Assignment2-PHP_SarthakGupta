@@ -20,8 +20,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if (!is_numeric($quantity) || !is_numeric($price) || $quantity <= 0 || $price <= 0) {
             $error = "Quantity and Price must be positive numbers.";
         } else {
-            $stmt = mysqli_prepare($dbc, "INSERT INTO football_jerseys (Football_JerseyName, Description, QuantityAvailable, Price, ProductAddedBy) VALUES (?, ?, ?, ?, 'Gaurav')");
-            mysqli_stmt_bind_param($stmt, 'ssii', $name, $description, $quantity, $price);
+            $stmt = mysqli_prepare($dbc, "INSERT INTO football_jerseys (Football_JerseyName, Description, QuantityAvailable, Price, ProductAddedBy) VALUES (?, ?, ?, ?, 'Sarthak')");
+            mysqli_stmt_bind_param($stmt, 'ssdi', $name, $description, $quantity, $price);
 
             if (mysqli_stmt_execute($stmt)) {
                 $success = true;
@@ -41,6 +41,7 @@ $dbc->close();
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -77,6 +78,7 @@ $dbc->close();
         }
     </script>
 </head>
+
 <body>
     <div class="container">
         <h1 class="mt-4">Add New Football Jersey</h1>
@@ -86,7 +88,7 @@ $dbc->close();
             <div class="alert alert-danger"><?= $error ?></div>
         <?php endif; ?>
         <div id="validationErrors" class="error"></div> <!-- For client-side validation errors -->
-        
+
         <form name="jerseyForm" method="POST" action="" onsubmit="return validateForm()">
             <div class="form-group">
                 <label>Jersey Name<span class="required-asterisk">*</span></label>
@@ -102,10 +104,11 @@ $dbc->close();
             </div>
             <div class="form-group">
                 <label>Price<span class="required-asterisk">*</span></label>
-                <input type="number" step="0.01" name="Price" class="form-control" value="<?= htmlspecialchars($price) ?>">
+                <input type="number" name="Price" class="form-control" step="0.01" value="<?= htmlspecialchars($price) ?>">
             </div>
             <button type="submit" class="btn btn-primary">Add Jersey</button>
         </form>
     </div>
 </body>
+
 </html>

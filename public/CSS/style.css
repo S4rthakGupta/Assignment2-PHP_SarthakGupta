@@ -1,3 +1,27 @@
+.banner img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.content-section {
+  padding: 20px 0;
+}
+
+.add-btn {
+  margin-bottom: 20px;
+}
+
+.table thead th {
+  background-color: #141414;
+  color: white;
+}
+
+footer {
+  margin-top: 50px;
+  padding: 20px 0;
+}
+
 .required-asterisk {
   content: " *";
   color: red;
@@ -5,3 +29,5 @@
 .error {
   color: red;
 }
+
+
