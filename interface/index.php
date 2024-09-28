@@ -38,6 +38,7 @@ $dbc->close();
                     <th>Description</th>
                     <th>Quantity</th>
                     <th>Price</th>
+                    <th>Product Added By</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -49,6 +50,7 @@ $dbc->close();
                         <td><?= htmlspecialchars($row['Description']) ?></td>
                         <td><?= $row['QuantityAvailable'] ?></td>
                         <td>$<?= number_format($row['Price'], 2) ?></td>
+                        <td><?= htmlspecialchars($row['ProductAddedBy']) ?></td>
                         <td>
                             <a href="update_data.php?id=<?= $row['Football_JerseyID'] ?>" class="btn btn-warning">Update</a>
                             <a href="delete_data.php?id=<?= $row['Football_JerseyID'] ?>" class="btn btn-danger">Delete</a>
@@ -62,7 +64,7 @@ $dbc->close();
     <!-- Footer Section -->
     <footer class="bg-dark text-white text-center">
         <div class="container">
-            <p>&copy; <?php echo date("Y"); ?> | Football Store</p>
+            <p>&copy; Copyright 2024 | Football Store</p>
             <p>Website developed by: Sarthak Gupta | Student ID: 8971797</p>
             <p>Subject: PHP Programming with MySQL</p>
         </div>

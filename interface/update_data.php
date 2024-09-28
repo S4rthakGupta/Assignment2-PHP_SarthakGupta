@@ -42,7 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         } else {
             // Update the jersey details
             $stmt = mysqli_prepare($dbc, "UPDATE football_jerseys SET Football_JerseyName = ?, Description = ?, QuantityAvailable = ?, Price = ? WHERE Football_JerseyID = ?");
-            mysqli_stmt_bind_param($stmt, 'ssdii', $name, $description, $quantity, $price, $id);
+            mysqli_stmt_bind_param($stmt, 'ssidi', $name, $description, $quantity, $price, $id);
 
             if (mysqli_stmt_execute($stmt)) {
                 $success = true;

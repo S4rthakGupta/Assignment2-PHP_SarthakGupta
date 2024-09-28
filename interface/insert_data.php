@@ -21,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $error = "Quantity and Price must be positive numbers.";
         } else {
             $stmt = mysqli_prepare($dbc, "INSERT INTO football_jerseys (Football_JerseyName, Description, QuantityAvailable, Price, ProductAddedBy) VALUES (?, ?, ?, ?, 'Sarthak')");
-            mysqli_stmt_bind_param($stmt, 'ssdi', $name, $description, $quantity, $price);
+            mysqli_stmt_bind_param($stmt, 'ssid', $name, $description, $quantity, $price);
 
             if (mysqli_stmt_execute($stmt)) {
                 $success = true;
