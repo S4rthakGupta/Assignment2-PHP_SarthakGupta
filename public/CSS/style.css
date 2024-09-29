@@ -1,46 +1,52 @@
-body
+/* This is the custom CSS for few self defined classes and to override Bootstrap classes. */
+body 
 {
   font-family: system-ui;
 }
 
-.banner img {
+.banner img 
+{
   width: 100%;
   height: auto;
   object-fit: cover;
 }
 
-.content-section {
+.content-section 
+{
   padding: 20px 0;
-  overflow-x:auto;
+  overflow-x: auto;
 }
 
-.add-btn {
+.add-btn 
+{
   margin-bottom: 20px;
 }
 
-.table thead th {
+.table thead th 
+{
   background-color: #141414;
   color: white;
 }
 
-tr
+tr 
 {
   font-weight: 700;
 }
 
-.required-asterisk {
+.required-asterisk 
+{
   content: " *";
   color: red;
 }
-.error {
+
+.error 
+{
   color: red;
 }
 
-
-
-footer {
+footer 
+{
   margin-top: 50px;
   padding: 20px 0;
 }
-
-
+/* CSS Styling ends here. */
