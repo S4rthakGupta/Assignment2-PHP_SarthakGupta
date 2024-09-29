@@ -8,6 +8,7 @@ $name = '';
 $description = '';
 $quantity = '';
 $price = '';
+$size = '';
 $success = false;
 $error = '';
 
@@ -16,7 +17,8 @@ $fieldErrors = [
     'name' => '',
     'description' => '',
     'quantity' => '',
-    'price' => ''
+    'price' => '',
+    'size' => ''
 ];
 
 // This below if block checks if the form is submitted via POST method.
@@ -27,6 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
     $description = $_POST['Football_JerseyDescription'];
     $quantity = $_POST['QuantityAvailable'];
     $price = $_POST['Price'];
+    $size = $_POST['Size'];
 
     // This below if statements are validating inputs and handling errors.
     if (empty($name)) {
@@ -41,13 +44,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
     if (empty($price) || !is_numeric($price) || $price <= 0) {
         $fieldErrors['price'] = "Price is required and must be a positive number.";
     }
+    if (empty($size)) {
+        $fieldErrors['size'] = "Product Size is required.";
+    }
 
     // If there are no errors in the form fields, it will proceed to insert data.
     if (array_filter($fieldErrors) == []) 
     {
         // This below prepare statment is a SQL statement to insert the form data into the database.
-        $stmt = mysqli_prepare($dbc, "INSERT INTO football_jerseys (Football_JerseyName, Football_JerseyDescription, QuantityAvailable, Price, ProductAddedBy) VALUES (?, ?, ?, ?, 'Sarthak')");
-        mysqli_stmt_bind_param($stmt, 'ssid', $name, $description, $quantity, $price);
+        $stmt = mysqli_prepare($dbc, "INSERT INTO football_jerseys (Football_JerseyName, Football_JerseyDescription, QuantityAvailable, Price, Size, ProductAddedBy) VALUES (?, ?, ?, ?, ?, 'Sarthak')");
+        mysqli_stmt_bind_param($stmt, 'ssids', $name, $description, $quantity, $price, $size);
 
         // Executing and checking if the statement was successful.
         if (mysqli_stmt_execute($stmt)) 
@@ -114,6 +120,13 @@ $dbc->close();
                 <label>Price<span class="required-asterisk">*</span></label>
                 <input type="number" name="Price" class="form-control" step="0.01" value="<?= htmlspecialchars($price) ?>">
                 <span class="text-danger"><?= $fieldErrors['price'] ?></span>
+            </div>
+
+            <!-- Custom Field as per my choice. -->
+            <div class="form-group">
+                <label>Size<span class="required-asterisk">*</span></label>
+                <input type="text" name="Size" class="form-control" value="<?= htmlspecialchars($size) ?>">
+                <span class="text-danger"><?= $fieldErrors['size'] ?></span>
             </div>
             <button type="submit" class="btn btn-primary">Add Jersey</button>
             <a href="index.php" class="btn btn-success">Go back to Home</a>

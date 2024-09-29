@@ -14,7 +14,8 @@ $fieldErrors = [
     'name' => '',
     'description' => '',
     'quantity' => '',
-    'price' => ''
+    'price' => '',
+    'size' => ''
 ];
 
 if ($id) {
@@ -41,6 +42,7 @@ $name = $jersey['Football_JerseyName'] ?? '';
 $description = $jersey['Football_JerseyDescription'] ?? '';
 $quantity = $jersey['QuantityAvailable'] ?? '';
 $price = $jersey['Price'] ?? '';
+$size = $jersey['Size'] ?? '';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') 
 {
@@ -50,6 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
     $description = trim($_POST['Football_JerseyDescription']);
     $quantity = trim($_POST['QuantityAvailable']);
     $price = trim($_POST['Price']);
+    $size = trim($_POST['Size']);
 
     // This below if statements will validate and sanitize inputs.
     if (empty($name)) 
@@ -68,15 +71,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
     {
         $fieldErrors['price'] = "Price is required and must be a positive number.";
     }
+    if (empty($description)) 
+    {
+        $fieldErrors['size'] = "Product size is required.";
+    }
 
     // If there are no errors this below code will update the jersey details.
     if (array_filter($fieldErrors) == []) 
     {
         // This below line prepares the update query.
-        $stmt = mysqli_prepare($dbc, "UPDATE football_jerseys SET Football_JerseyName = ?, Football_JerseyDescription = ?, QuantityAvailable = ?, Price = ? WHERE Football_JerseyID = ?");
+        $stmt = mysqli_prepare($dbc, "UPDATE football_jerseys SET Football_JerseyName = ?, Football_JerseyDescription = ?, QuantityAvailable = ?, Price = ?, Size = ? WHERE Football_JerseyID = ?");
 
         // Binding the input values to the query.
-        mysqli_stmt_bind_param($stmt, 'ssidi', $name, $description, $quantity, $price, $id);
+        mysqli_stmt_bind_param($stmt, 'ssidsi', $name, $description, $quantity, $price, $size,$id);
 
         // Executing the query and checking if it was successfull.
         if (mysqli_stmt_execute($stmt)) {
@@ -146,6 +153,13 @@ $dbc->close();
                     <label>Price<span class="required-asterisk">*</span></label>
                     <input type="number" step="0.01" name="Price" class="form-control" value="<?= htmlspecialchars($price) ?>">
                     <span class="text-danger"><?= $fieldErrors['price'] ?></span>
+                </div>
+
+                <!-- Custom Field as per my choice. -->
+                <div class="form-group">
+                    <label>Size<span class="required-asterisk">*</span></label>
+                    <input type="text" name="Size" class="form-control" value="<?= htmlspecialchars($size) ?>">
+                    <span class="text-danger"><?= $fieldErrors['size'] ?></span>
                 </div>
                 <button type="submit" class="btn btn-warning">Update Jersey</button>
                 <a href="index.php" class="btn btn-success">Go back to Home</a>

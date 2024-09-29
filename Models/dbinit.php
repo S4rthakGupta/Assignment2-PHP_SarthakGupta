@@ -35,6 +35,8 @@ $table_query = "CREATE TABLE IF NOT EXISTS football_jerseys (
     Football_JerseyDescription TEXT NOT NULL,
     QuantityAvailable INT NOT NULL,
     Price DECIMAL(10, 2) NOT NULL,
+    -- Custom Property given by myself in my assignment as per the instructions.
+    Size VARCHAR(10) NOT NULL,
     ProductAddedBy VARCHAR(100) NOT NULL DEFAULT 'Sarthak'
 )";
 

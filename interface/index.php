@@ -54,6 +54,7 @@ $dbc->close();
                         <th>Description</th>
                         <th>Quantity</th>
                         <th>Price</th>
+                        <th>Size</th> <!-- Custom Field as per my choice. -->
                         <th>Product Added By</th>
                         <th>Actions</th>
                     </tr>
@@ -69,6 +70,7 @@ $dbc->close();
                             <td><?= htmlspecialchars($row['Football_JerseyDescription']) ?></td>
                             <td><?= $row['QuantityAvailable'] ?></td>
                             <td>$<?= number_format($row['Price'], 2) ?></td>
+                            <td><?= htmlspecialchars($row['Size']) ?></td>
                             <td><?= htmlspecialchars($row['ProductAddedBy']) ?></td>
 
                             <!-- This below are two buttons for redirecting to update_data or delete_data.php -->
