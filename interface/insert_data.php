@@ -11,7 +11,7 @@ $error = '';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $name = $_POST['Football_JerseyName'];
-    $description = $_POST['Description'];
+    $description = $_POST['Football_JerseyDescription'];
     $quantity = $_POST['QuantityAvailable'];
     $price = $_POST['Price'];
 
@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if (!is_numeric($quantity) || !is_numeric($price) || $quantity <= 0 || $price <= 0) {
             $error = "Quantity and Price must be positive numbers.";
         } else {
-            $stmt = mysqli_prepare($dbc, "INSERT INTO football_jerseys (Football_JerseyName, Description, QuantityAvailable, Price, ProductAddedBy) VALUES (?, ?, ?, ?, 'Sarthak')");
+            $stmt = mysqli_prepare($dbc, "INSERT INTO football_jerseys (Football_JerseyName, Football_JerseyDescription, QuantityAvailable, Price, ProductAddedBy) VALUES (?, ?, ?, ?, 'Sarthak')");
             mysqli_stmt_bind_param($stmt, 'ssid', $name, $description, $quantity, $price);
 
             if (mysqli_stmt_execute($stmt)) {
@@ -52,7 +52,7 @@ $dbc->close();
     <script>
         function validateForm() {
             let name = document.forms["jerseyForm"]["Football_JerseyName"].value;
-            let description = document.forms["jerseyForm"]["Description"].value;
+            let description = document.forms["jerseyForm"]["Football_JerseyDescription"].value;
             let quantity = document.forms["jerseyForm"]["QuantityAvailable"].value;
             let price = document.forms["jerseyForm"]["Price"].value;
             let errorMessages = [];
@@ -96,7 +96,7 @@ $dbc->close();
             </div>
             <div class="form-group">
                 <label>Description<span class="required-asterisk">*</span></label>
-                <textarea name="Description" class="form-control"><?= htmlspecialchars($description) ?></textarea>
+                <textarea name="Football_JerseyDescription" class="form-control"><?= htmlspecialchars($description) ?></textarea>
             </div>
             <div class="form-group">
                 <label>Quantity Available<span class="required-asterisk">*</span></label>
@@ -107,6 +107,7 @@ $dbc->close();
                 <input type="number" name="Price" class="form-control" step="0.01" value="<?= htmlspecialchars($price) ?>">
             </div>
             <button type="submit" class="btn btn-primary">Add Jersey</button>
+            <a href="index.php" class="btn btn-success">Go back to Home</a>
         </form>
     </div>
 </body>

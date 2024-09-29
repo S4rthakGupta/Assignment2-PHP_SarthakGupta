@@ -5,6 +5,13 @@ include('../Models/dbinit.php');
 $query = "SELECT * FROM football_jerseys";
 $result = mysqli_query($dbc, $query);
 
+// Check if there are any rows in the result set
+if(mysqli_num_rows($result) > 0) {
+    $hasRecords = true;
+} else {
+    $hasRecords = false;
+}
+
 // Close the connection
 $dbc->close();
 ?>
@@ -30,35 +37,41 @@ $dbc->close();
         </div>
         
         <!-- Table of Football Jerseys -->
-        <table class="table table-bordered table-hover table-striped">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Description</th>
-                    <th>Quantity</th>
-                    <th>Price</th>
-                    <th>Product Added By</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php while($row = mysqli_fetch_assoc($result)): ?>
+        <?php if ($hasRecords): ?>
+            <table class="table table-bordered table-hover table-striped">
+                <thead>
                     <tr>
-                        <td><?= $row['Football_JerseyID'] ?></td>
-                        <td><?= htmlspecialchars($row['Football_JerseyName']) ?></td>
-                        <td><?= htmlspecialchars($row['Description']) ?></td>
-                        <td><?= $row['QuantityAvailable'] ?></td>
-                        <td>$<?= number_format($row['Price'], 2) ?></td>
-                        <td><?= htmlspecialchars($row['ProductAddedBy']) ?></td>
-                        <td>
-                            <a href="update_data.php?id=<?= $row['Football_JerseyID'] ?>" class="btn btn-warning">Update</a>
-                            <a href="delete_data.php?id=<?= $row['Football_JerseyID'] ?>" class="btn btn-danger">Delete</a>
-                        </td>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                        <th>Product Added By</th>
+                        <th>Actions</th>
                     </tr>
-                <?php endwhile; ?>
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    <?php while($row = mysqli_fetch_assoc($result)): ?>
+                        <tr>
+                            <td><?= $row['Football_JerseyID'] ?></td>
+                            <td><?= htmlspecialchars($row['Football_JerseyName']) ?></td>
+                            <td><?= htmlspecialchars($row['Football_JerseyDescription']) ?></td>
+                            <td><?= $row['QuantityAvailable'] ?></td>
+                            <td>$<?= number_format($row['Price'], 2) ?></td>
+                            <td><?= htmlspecialchars($row['ProductAddedBy']) ?></td>
+                            <td>
+                                <a href="update_data.php?id=<?= $row['Football_JerseyID'] ?>" class="btn btn-warning">Update</a>
+                                <a href="delete_data.php?id=<?= $row['Football_JerseyID'] ?>" class="btn btn-danger">Delete</a>
+                            </td>
+                        </tr>
+                    <?php endwhile; ?>
+                </tbody>
+            </table>
+        <?php else: ?>
+            <div class="alert alert-warning text-center" role="alert">
+                No records found.
+            </div>
+        <?php endif; ?>
     </div>
 
     <!-- Footer Section -->

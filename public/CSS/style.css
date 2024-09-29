@@ -1,3 +1,8 @@
+body
+{
+  font-family: system-ui;
+}
+
 .banner img {
   width: 100%;
   height: auto;
@@ -18,9 +23,9 @@
   color: white;
 }
 
-footer {
-  margin-top: 50px;
-  padding: 20px 0;
+tr
+{
+  font-weight: 700;
 }
 
 .required-asterisk {
@@ -29,6 +34,13 @@ footer {
 }
 .error {
   color: red;
+}
+
+
+
+footer {
+  margin-top: 50px;
+  padding: 20px 0;
 }
 
 

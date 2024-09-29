@@ -24,13 +24,13 @@ if ($id) {
 
 // Initialize form values
 $name = $jersey['Football_JerseyName'] ?? '';
-$description = $jersey['Description'] ?? '';
+$description = $jersey['Football_JerseyDescription'] ?? '';
 $quantity = $jersey['QuantityAvailable'] ?? '';
 $price = $jersey['Price'] ?? '';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $name = trim($_POST['Football_JerseyName']);
-    $description = trim($_POST['Description']);
+    $description = trim($_POST['Football_JerseyDescription']);
     $quantity = trim($_POST['QuantityAvailable']);
     $price = trim($_POST['Price']);
 
@@ -41,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $error = "Quantity and Price must be positive numbers.";
         } else {
             // Update the jersey details
-            $stmt = mysqli_prepare($dbc, "UPDATE football_jerseys SET Football_JerseyName = ?, Description = ?, QuantityAvailable = ?, Price = ? WHERE Football_JerseyID = ?");
+            $stmt = mysqli_prepare($dbc, "UPDATE football_jerseys SET Football_JerseyName = ?, Football_JerseyDescription = ?, QuantityAvailable = ?, Price = ? WHERE Football_JerseyID = ?");
             mysqli_stmt_bind_param($stmt, 'ssidi', $name, $description, $quantity, $price, $id);
 
             if (mysqli_stmt_execute($stmt)) {
@@ -72,7 +72,7 @@ $dbc->close();
     <script>
         function validateForm() {
             let name = document.forms["jerseyForm"]["Football_JerseyName"].value;
-            let description = document.forms["jerseyForm"]["Description"].value;
+            let description = document.forms["jerseyForm"]["Football_JerseyDescription"].value;
             let quantity = document.forms["jerseyForm"]["QuantityAvailable"].value;
             let price = document.forms["jerseyForm"]["Price"].value;
             let errorMessages = [];
@@ -118,7 +118,7 @@ $dbc->close();
             </div>
             <div class="form-group">
                 <label>Description<span class="required-asterisk">*</span></label>
-                <textarea name="Description" class="form-control"><?= htmlspecialchars($description) ?></textarea>
+                <textarea name="Football_JerseyDescription" class="form-control"><?= htmlspecialchars($description) ?></textarea>
             </div>
             <div class="form-group">
                 <label>Quantity Available<span class="required-asterisk">*</span></label>
@@ -128,7 +128,9 @@ $dbc->close();
                 <label>Price<span class="required-asterisk">*</span></label>
                 <input type="number" step="0.01" name="Price" class="form-control" value="<?= htmlspecialchars($price) ?>" >
             </div>
+            <div class="form-group">
             <button type="submit" class="btn btn-warning">Update Jersey</button>
+            <a href="index.php" class="btn btn-success">Go back to Home</a>
         </form>
         <?php endif; ?>
     </div>

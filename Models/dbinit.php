@@ -28,7 +28,7 @@ $dbc->select_db(DB_NAME);
 $table_query = "CREATE TABLE IF NOT EXISTS football_jerseys (
     Football_JerseyID INT AUTO_INCREMENT PRIMARY KEY,
     Football_JerseyName VARCHAR(100) NOT NULL,
-    Description TEXT NOT NULL,
+    Football_JerseyDescription TEXT NOT NULL,
     QuantityAvailable INT NOT NULL,
     Price DECIMAL(10, 2) NOT NULL,
     ProductAddedBy VARCHAR(100) NOT NULL DEFAULT 'Sarthak'
